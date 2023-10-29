@@ -8,4 +8,6 @@ function search(event) {
   event.preventDefault();
   const userInput = inputField.value.toLowerCase();
   console.log(userInput);
+  
+  
 }
