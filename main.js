@@ -49,10 +49,28 @@ const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 const randomHouse = houses[Math.floor(Math.random() * houses.length)];
 const studentName = document.querySelector('#form-control').value;
 
+let nameBackGroundColor;
+
+switch(randomHouse){
+    case "Gryffindor":
+        nameBackGroundColor= "red";
+        break;
+    case "Hufflepuff":
+        nameBackGroundColor = "yellow";
+        break;
+    case "Ravenclaw":
+        nameBackGroundColor = "blue"
+        break;
+    case "Slytherin":
+        nameBackGroundColor = 'green';
+}
+
+
 const studentCard = `
 <div class="card mt-3">
   <div class="card-body">
-    <h5 class="card-title">${studentName}</h5>
+    
+    <h5 style="background-color:${nameBackGroundColor}" class="card-title">${studentName}</h5>
     <p class="card-text">House: ${randomHouse}</p>
     <button class="btn btn-danger expel">Expel</button>
   </div>
