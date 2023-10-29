@@ -1,7 +1,11 @@
 const formStudent = document.querySelector(".container");
 const startSortingButton = document.querySelector("#startSorting");
+//  add the event listener to the start sorting button at the welcome card
+startSortingButton.addEventListener("click", studentsForms);
 
+const studentsArray=[]; 
 function studentsForms(event) {
+    document.querySelector(".card").remove();
     formStudent.innerHTML = `
     <div id="form">
         <h1>Enter First Year's Name</h1>
@@ -15,28 +19,54 @@ function studentsForms(event) {
             </div>
         </form>
     </div>`;
+
+
+
+
     
-    // Add event listener to the new form
-    formStudent.querySelector('form').addEventListener("submit", search);
-}
-const studentsArray = [];
-function search(event) {
+// Add event listener to the new form
+formStudent.querySelector('form').addEventListener("submit", function(event) {
     // Prevents the form from submitting and the page from reloading
     event.preventDefault();
+    // create a sorting function
+    sortStudent();
     
-    const inputField = document.querySelector("#form-control");
-    const userInput = inputField.value.toLowerCase();
-    console.log(userInput);
-    studentsArray.push(userInput);
-    console.log(studentsArray)
-    return studentsArray;
+    
 
-    
+})
 }
 
+ 
+function sortStudent(){
+const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
+// randomHouse will hold the array and the random  index number 
+// const house = ['house1','house2', 'house3', 'house4'];
+// const randomHouses = Math.random() * house.length;
+// const indexHouse = Math.floor(randomHouses);
+// console.log(randomHouses);
+// console.log(indexHouse);
+// console.log(house[indexHouse]);
+const randomHouse = houses[Math.floor(Math.random() * houses.length)];
+const studentName = document.querySelector('#form-control').value;
+
+const studentCard = `
+<div class="card mt-3">
+  <div class="card-body">
+    <h5 class="card-title">${studentName}</h5>
+    <p class="card-text">House: ${randomHouse}</p>
+    <button class="btn btn-danger expel">Expel</button>
+  </div>
+</div>
+`;
+
+document.querySelector('.studentsList').innerHTML += studentCard;
+document.querySelector('#form-control').value = ''; // Clear the form
+}
+    
 
 
-startSortingButton.addEventListener("click", studentsForms);
+
+
 
 
 
