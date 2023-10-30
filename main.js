@@ -36,8 +36,8 @@ formStudent.querySelector('form').addEventListener("submit", function(event) {
 })
 }
 
- 
-function sortStudent(){
+let studentName;
+function sortStudent(studentName){
 const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 // randomHouse will hold the array and the random  index number 
 // const house = ['house1','house2', 'house3', 'house4'];
@@ -46,40 +46,87 @@ const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 // console.log(randomHouses);
 // console.log(indexHouse);
 // console.log(house[indexHouse]);
-const randomHouse = houses[Math.floor(Math.random() * houses.length)];
-const studentName = document.querySelector('#form-control').value;
+const randomHouse = houses[Math.floor(Math.random() * houses.length)];        studentName = document.querySelector('#form-control').value;
 
 let nameBackGroundColor;
+let image;
 
 switch(randomHouse){
     case "Gryffindor":
         nameBackGroundColor= "red";
+        image = "red_hat.jpg"
         break;
     case "Hufflepuff":
         nameBackGroundColor = "yellow";
+        image= "yellow_hat.jpg"
         break;
     case "Ravenclaw":
-        nameBackGroundColor = "blue"
+        nameBackGroundColor = "blue";
+        image = "blue_hat.jpg"
         break;
     case "Slytherin":
         nameBackGroundColor = 'green';
+        image = "green_hat.jpg"
 }
 
-
 const studentCard = `
-<div class="card mt-3">
-  <div class="card-body">
-    
-    <h5 style="background-color:${nameBackGroundColor}" class="card-title">${studentName}</h5>
-    <p class="card-text">House: ${randomHouse}</p>
-    <button class="btn btn-danger expel">Expel</button>
-  </div>
-</div>
-`;
+<div class="container mt-5">
+    <div class="card" style="width: 18rem;">
+        
+        <img src=${image} class="card-img-top" alt="Student">
+        
+      
+        <div class="card-body">
+            <h5 style="background-color:${nameBackGroundColor}" class="card-title studentName">${studentName}</h5>
+            <p class="card-text">House: ${randomHouse}</p>
+            <button class="btn btn-danger expel">Expel</button>
+        </div>
+    </div>
+</div>`;
+
 
 document.querySelector('.studentsList').innerHTML += studentCard;
 document.querySelector('#form-control').value = ''; // Clear the form
+return studentName;
+
 }
+
+
+
+document.querySelector('.studentsList').addEventListener('click', function(e) {
+    // e.target property target the specif elemetn  of html clicked 
+    // classList property list of the class attributes of the Element
+//    contains('expel') This method checks if the list of classes contanin expel class
+//    It returns a boolean: true if the class exists and false if it doesn't.
+    console.log(e.target);
+    if(e.target.classList.contains('expel')) { 
+        
+        // parentElement property will navigate to its parent element in this case is div .card-body
+        // Within that parent element, it's finding the <h5> tag with the class studentName
+        // textContent property get the name of the Student from <h5>tag
+        let name = e.target.parentElement.querySelector('.studentName').textContent;
+        
+        document.querySelector("#notBeNamed").innerHTML = "He Who Must Not Be Named's Army";
+        
+        const enemyArmy = `
+        <div class="container mt-5">
+            <div class="card" style="width: 18rem;">
+                
+                <img src="army.jpg" class="card-img-top" alt="Moldy Voldy's Army">
+                
+               
+                <div class="card-body">
+                    <h5 class="card-title">Moldy Voldy's Army </h5>
+                    <p class="card-text">Sadly, ${name} went over to the dark side! </p>
+                </div>
+            </div>
+        </div>`;
+   
+        document.querySelector('.army').innerHTML += enemyArmy;
+    }
+});
+
+   
     
 
 
