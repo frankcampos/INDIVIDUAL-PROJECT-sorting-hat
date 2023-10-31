@@ -37,6 +37,11 @@ formStudent.querySelector('#form').addEventListener("submit", function(event) {
 })
 }
 
+function rendertoDom(divId, html){
+    const selectedDiv = document.querySelector(divId)
+    selectedDiv.innerHTML +=html;
+}
+
 let studentObject;
 function sortStudent(studentsArray){
 const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
@@ -87,8 +92,8 @@ const studentCard = `
     </div>
 </div>`;
 
-
-document.querySelector('.studentsList').innerHTML += studentCard;
+rendertoDom('.studentsList',studentCard)
+// document.querySelector('.studentsList').innerHTML += studentCard;
 document.querySelector('#form-control').value = ''; // Clear the form
 
 
@@ -103,6 +108,8 @@ document.querySelector('#form-control').value = ''; // Clear the form
 
 
 }
+
+
 console.log('studensArray out of its function')
 console.log(studentsArray);
 
