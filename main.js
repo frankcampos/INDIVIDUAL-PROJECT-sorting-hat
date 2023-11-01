@@ -1,11 +1,21 @@
 const formStudent = document.querySelector(".container");
+const buttons = document.querySelector(".buttons")
 const startSortingButton = document.querySelector("#startSorting");
 //  add the event listener to the start sorting button at the welcome card
 startSortingButton.addEventListener("click", studentsForms);
+let studentCard = ""
+
+
 
 let studentsArray = [];
 function studentsForms(event) {
     document.querySelector(".card").remove();
+    buttons.innerHTML =`<h1>Filter Students</h1>
+    <button class="gryffindor btn btn-primary mr-2">Gryffindor</button>
+    <button class="hufflepuff btn btn-secondary mr-2">Hufflepuff</button>
+    <button class="ravenclaw btn btn-success mr-2">Ravenclaw</button>
+    <button class="slytherin btn btn-danger mr-2">Slytherin</button>
+    <button id="all" class="all btn btn-dark">All</button>`;
 
     formStudent.innerHTML = `
     <div id="form">
@@ -21,12 +31,15 @@ function studentsForms(event) {
         </form>
     </div>`;
 
+    
+
 
 
 
     
 // Add event listener to the new form
 formStudent.querySelector('#form').addEventListener("submit", function(event) {
+    
     // Prevents the form from submitting and the page from reloading
     event.preventDefault();
     // create a sorting function
@@ -36,6 +49,8 @@ formStudent.querySelector('#form').addEventListener("submit", function(event) {
 
 })
 }
+
+
 
 function rendertoDom(divId, html){
     const selectedDiv = document.querySelector(divId)
@@ -77,8 +92,8 @@ switch(randomHouse){
         image = "green_hat.jpg"
 }
 
-const studentCard = `
-<div class="container mt-5">
+ studentCard = `
+<div id=studentcard class="container mt-5">
     <div class="card" style="width: 18rem;">
         
         <img src=${image} class="card-img-top" alt="Student">
@@ -125,6 +140,7 @@ document.querySelector('.studentsList').addEventListener('click', function(e) {
     console.log(e.target);
     if(e.target.classList.contains('expel')) { 
         
+        
         // parentElement property will navigate to its parent element in this case is div .card-body
         // Within that parent element, it's finding the <h5> tag with the class studentName
         // textContent property get the name of the Student from <h5>tag
@@ -153,6 +169,19 @@ document.querySelector('.studentsList').addEventListener('click', function(e) {
     console.log(studentsArray);
     console.log("I can access to students array from anywhere")
 });
+
+document.querySelector('#allButtons').addEventListener('click', function(e) {
+    if(e.target.classList.contains('all')) { 
+        // document.querySelector("#studentcard").remove();
+        document.querySelector(".army").remove();
+        rendertoDom('.studentsList',studentCard)
+        // newbranch
+        
+    }
+
+})
+
+
 
    
     
