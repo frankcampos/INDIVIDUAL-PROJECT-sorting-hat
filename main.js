@@ -175,6 +175,7 @@ document.querySelector('#allButtons').addEventListener('click', function(e) {
         // document.querySelector("#studentcard").remove();
         document.querySelector(".army").remove();
         rendertoDom('.studentsList',studentCard)
+        // newbranch
         
     }
 
