@@ -107,7 +107,7 @@ switch(randomHouse){
     </div>
 </div>`;
 
-rendertoDom('.studentsList',studentCard)
+ rendertoDom('.studentsList',studentCard);
 // document.querySelector('.studentsList').innerHTML += studentCard;
 document.querySelector('#form-control').value = ''; // Clear the form
 
@@ -127,8 +127,7 @@ document.querySelector('#form-control').value = ''; // Clear the form
 }
 
 
-console.log('studensArray out of its function')
-console.log(studentsArray);
+
 
 
 
@@ -147,6 +146,9 @@ document.querySelector('.studentsList').addEventListener('click', function(e) {
         // Within that parent element, it's finding the <h5> tag with the class studentName
         // textContent property get the name of the Student from <h5>tag
         let name = e.target.parentElement.querySelector('.studentName').textContent;
+        let expelledStudentCard = e.target.closest('.container');
+        expelledStudentCard.remove();
+        const removedStudent = studentsArray.pop();
         
         document.querySelector("#notBeNamed").innerHTML = "He Who Must Not Be Named's Army";
         
