@@ -11,10 +11,10 @@ let studentsArray = [];
 function studentsForms(event) {
     document.querySelector(".card").remove();
     buttons.innerHTML =`<h1>Filter Students</h1>
-    <button class="gryffindor btn btn-primary mr-2">Gryffindor</button>
-    <button class="hufflepuff btn btn-secondary mr-2">Hufflepuff</button>
-    <button class="ravenclaw btn btn-success mr-2">Ravenclaw</button>
-    <button class="slytherin btn btn-danger mr-2">Slytherin</button>
+    <button class="gryffindor btn btn-danger mr-2">Gryffindor</button>
+    <button class="hufflepuff btn btn-warning mr-2">Hufflepuff</button>
+    <button class="ravenclaw btn btn-primary mr-2">Ravenclaw</button>
+    <button class="slytherin btn btn-success mr-2">Slytherin</button>
     <button id="all" class="all btn btn-dark">All</button>`;
 
     formStudent.innerHTML = `
@@ -115,7 +115,9 @@ document.querySelector('#form-control').value = ''; // Clear the form
 
  studentObject = {id :studentsArray.length + 1,
                      name:`${studentName}`,
-                     house:`${randomHouse}`
+                     house:`${randomHouse}`,
+                     backGroundColor:`${nameBackGroundColor}`,
+                     image:`${image}`
                     }
                     studentsArray.push(studentObject);
                     
@@ -170,27 +172,76 @@ document.querySelector('.studentsList').addEventListener('click', function(e) {
     console.log("I can access to students array from anywhere")
 });
 
+
+
+
+// event function of the buttons
 document.querySelector('#allButtons').addEventListener('click', function(e) {
-    if(e.target.classList.contains('all')) { 
-        // document.querySelector("#studentcard").remove();
-        document.querySelector(".army").remove();
-        rendertoDom('.studentsList',studentCard)
-        // newbranch
-        
+    if (e.target.classList.contains('all')) { 
+        // Display all students
+        renderAllStudents();
+    } else if (e.target.classList.contains('gryffindor')) {
+        // Filter and display Gryffindor students
+        const gryffindorStudents = studentsArray.filter((student) => student.house === "Gryffindor");
+        renderFilteredStudents(gryffindorStudents);
+    } else if (e.target.classList.contains('hufflepuff')) {
+        // Filter and display Hufflepuff students
+        const hufflepuffStudents = studentsArray.filter((student) => student.house === "Hufflepuff");
+        renderFilteredStudents(hufflepuffStudents);
+    } else if (e.target.classList.contains('ravenclaw')) {
+        // Filter and display Ravenclaw students
+        const ravenclawStudents = studentsArray.filter((student) => student.house === "Ravenclaw");
+        renderFilteredStudents(ravenclawStudents);
+    } else if (e.target.classList.contains('slytherin')) {
+        // Filter and display Slytherin students
+        const slytherinStudents = studentsArray.filter((student) => student.house === "Slytherin");
+        renderFilteredStudents(slytherinStudents);
     }
+});
 
-})
-
-
-
-   
+// Function to render all students
+function renderAllStudents() {
+    const studentsListDiv = document.querySelector('.studentsList');
+    studentsListDiv.innerHTML = ""; // Clear the existing content
     
+    studentsArray.forEach((student) => {
+        const studentCard = createStudentCard(student);
+        
+        studentsListDiv.innerHTML += studentCard;
+    });
+}
+
+// Function to render filtered students
+function renderFilteredStudents(filteredStudents) {
+    const studentsListDiv = document.querySelector('.studentsList');
+    studentsListDiv.innerHTML = ""; // Clear the existing content
+    
+    filteredStudents.forEach((student) => {
+        const studentCard = createStudentCard(student);
+        
+        studentsListDiv.innerHTML += studentCard;
+    });
+}
+
+// Function to create a student card
+function createStudentCard(student) {
+    
+    
+    
+    const studentCard= `
+    <div class="container mt-5">
+        <div class="card" style="width: 18rem;">
+            <img src="${student.image}" class="card-img-top" alt="Student">
+            <div class="card-body">
+                <h5 style="background-color:${student.backGroundColor}" class="card-title studentName">${student.name}</h5>
+                <p class="card-text">House: ${student.house}</p>
+                <button class="btn btn-danger expel">Expel</button>
+            </div>
+        </div>
+    </div>`;
+    
+    return studentCard;
+}
 
 
-
-
-
-
-
-  
   
