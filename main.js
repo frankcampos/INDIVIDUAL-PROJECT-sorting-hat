@@ -1,4 +1,4 @@
-const formStudent = document.querySelector(".container");
+const formStudent = document.querySelector("#containerForm");
 const buttons = document.querySelector(".buttons")
 const startSortingButton = document.querySelector("#startSorting");
 //  add the event listener to the start sorting button at the welcome card
@@ -9,7 +9,7 @@ let studentCard = ""
 
 let studentsArray = [];
 function studentsForms(event) {
-    document.querySelector(".card").remove();
+    document.querySelector(".container").remove();
     buttons.innerHTML =`<h1>Filter Students</h1>
     <button class="gryffindor btn btn-danger mr-2">Gryffindor</button>
     <button class="hufflepuff btn btn-warning mr-2">Hufflepuff</button>
@@ -42,6 +42,8 @@ formStudent.querySelector('#form').addEventListener("submit", function(event) {
     
     // Prevents the form from submitting and the page from reloading
     event.preventDefault();
+
+    
     // create a sorting function
     sortStudent(studentsArray);
     
@@ -93,7 +95,7 @@ switch(randomHouse){
 }
 
  studentCard = `
-<div id=studentcard class="container mt-5">
+<div id=studentcard class="container StudentContainer mt-5">
     <div class="card" style="width: 18rem;">
         
         <img src=${image} class="card-img-top" alt="Student">
@@ -146,8 +148,8 @@ document.querySelector('.studentsList').addEventListener('click', function(e) {
         // Within that parent element, it's finding the <h5> tag with the class studentName
         // textContent property get the name of the Student from <h5>tag
         let name = e.target.parentElement.querySelector('.studentName').textContent;
-        let expelledStudentCard = e.target.closest('.container');
-        expelledStudentCard.remove();
+        let deleteStudent = e.target.closest('.StudentContainer');
+        deleteStudent.remove();
         const removedStudent = studentsArray.pop();
         
         document.querySelector("#notBeNamed").innerHTML = "He Who Must Not Be Named's Army";
