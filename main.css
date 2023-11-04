@@ -1,0 +1,31 @@
+#flexcontainer {
+  display: flex; /* This turns .flexboxContainer into a flex container */
+  justify-content: center; /* This centers the child horizontally */
+  align-items: center; /* This centers the child vertically */
+   min-height: 100vh; 
+   /* This ensures that the .flexboxContainer is at least the height of the viewport */ 
+   
+}
+
+#allButtons{
+ 
+  text-align: center;
+  
+}
+
+#containerForm{
+  text-align: center;
+}
+
+.masterDiv{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+ 
+}
+
+
+
+   
+  
+  
